@@ -1,5 +1,5 @@
 // Database configuration
-const db = require('../config');
+const db = require('../config/db.config');
 // bcrypt module
 const {hash, compare, hashSync } = require('bcrypt');
 // Middleware for creating a token
@@ -11,7 +11,7 @@ class User {
         const strQry = 
         `
         SELECT firstName, lastName, gender, emailAdd, userPass, userRole, userProfile
-        FROM Users
+        FROM users
         WHERE emailAdd = '${emailAdd}';
         `;
         db.query(strQry, async (err, data)=>{
@@ -56,7 +56,7 @@ class User {
         const strQry = 
         `
         SELECT userID, firstName, lastName, gender, cellphoneNumber, emailAdd, userRole, userProfile, joinDate, cart
-        FROM Users;
+        FROM users;
         `;
         //db
         db.query(strQry, (err, data)=>{
@@ -94,7 +94,7 @@ class User {
         }
         // sql query
         const strQry =
-        `INSERT INTO Users
+        `INSERT INTO users
         SET ?;`;
         db.query(strQry, [detail], (err)=> {
             if(err) {
@@ -119,7 +119,7 @@ class User {
             data.userPass = hashSync(data.userPass, 15);
         const strQry = 
         `
-        UPDATE Users
+        UPDATE users
         SET ?
         WHERE userID = ?;
         `;
@@ -134,7 +134,7 @@ class User {
     deleteUser(req, res) {
         const strQry = 
         `
-        DELETE FROM Users
+        DELETE FROM users
         WHERE userID = ?;
         `;
         //db
@@ -171,7 +171,7 @@ class Product {
     addProduct(req, res) {
         const strQry = 
         `
-        INSERT INTO Products
+        INSERT INTO products
         SET ?;
         `;
         db.query(strQry,[req.body],
@@ -188,7 +188,7 @@ class Product {
     updateProduct(req, res) {
         const strQry = 
         `
-        UPDATE Products
+        UPDATE products
         SET ?
         WHERE id = ?
         `;
@@ -206,7 +206,7 @@ class Product {
     deleteProduct(req, res) {
         const strQry = 
         `
-        DELETE FROM Products
+        DELETE FROM products
         WHERE id = ?;
         `;
         db.query(strQry,[req.params.id], (err)=> {

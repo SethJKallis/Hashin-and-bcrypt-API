@@ -3,66 +3,66 @@ const express = require('express');
 const path = require('path');
 // body-parser
 const bodyParser = require('body-parser');
-// Router
-const route = express.Router();
+// router
+const router = express.Router();
 // Models
-const {User, Product} = require('../model');
+const {User, Product} = require('../models');
 // Create a user instance
 const user = new User();
 // Product instance
 const product = new Product();
 // ^/$|/jtbookstore
-route.get('^/$|/jtbookstore', (req, res)=>{
+router.get('^/$|/jtbookstore', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, '../view/index.html'));
 })
 
-// =========USER's Router========
+// =========USER's router========
 // Login
-route.post('/login', bodyParser.json(), (req, res)=>{
+router.post('/login', bodyParser.json(), (req, res)=>{
     user.login(req, res);
 })
 // Retrieve all users
-route.get('/users', (req, res)=>{
+router.get('/users', (req, res)=>{
     user.fetchUsers(req, res);
 });
 // Update
-route.put('/user/:id',bodyParser.json(), (req, res)=>{
+router.put('/user/:id',bodyParser.json(), (req, res)=>{
     user.updateUser(req, res);
 });
 // Register
-route.post('/register', bodyParser.json(), (req, res)=> {
+router.post('/register', bodyParser.json(), (req, res)=> {
     user.createUser(req, res);
 })
 // Delete
-route.delete('/user/:id', (req, res)=>{
+router.delete('/user/:id', (req, res)=>{
     user.deleteUser(req, res);
 });
 // =====Products======
 // Fetch all products
-route.get('/products', (req, res)=> {
+router.get('/products', (req, res)=> {
     product.fetchProducts(req, res);
 })
 // Fetch a single product
-route.get('/product/:id', 
+router.get('/product/:id', 
 (req, res)=> {
     product.fetchProduct(req, res);
 })
 // Add a new product
-route.post('/product', 
+router.post('/product', 
 bodyParser.json(), 
 (req, res)=> {
     product.addProduct(req, res);
 })
 // Update a product
-route.put('/product/:id', 
+router.put('/product/:id', 
 bodyParser.json(),
 (req, res)=> {
     product.updateProduct(req, res);
 })
 // Delete a product
-route.delete('/product/:id', 
+router.delete('/product/:id', 
 (req, res)=> {
     product.deleteProduct(req, res);
-})
+});
 
-module.exports = route;
+module.exports = router;
