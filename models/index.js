@@ -56,8 +56,7 @@ class User {
         const strQry = 
         `
         SELECT userID, firstName, lastName, gender, cellphoneNumber, emailAdd, userRole, userProfile, joinDate, cart
-        FROM users;
-        `;
+        FROM users;`;
         //db
         db.query(strQry, (err, data)=>{
             if(err) throw err;
@@ -70,8 +69,7 @@ class User {
         `
         SELECT userID, firstName, lastName, gender, cellphoneNumber, emailAdd, userRole, userProfile, joinDate, cart
         FROM Users
-        WHERE userID = ?;
-        `;
+        WHERE userID = ?;`;
         //db
         db.query(strQry,[req.params.id], 
             (err, data)=>{
@@ -121,8 +119,7 @@ class User {
         `
         UPDATE users
         SET ?
-        WHERE userID = ?;
-        `;
+        WHERE userID = ?;`;
         //db
         db.query(strQry,[data, req.params.id], 
             (err)=>{
@@ -135,8 +132,7 @@ class User {
         const strQry = 
         `
         DELETE FROM users
-        WHERE userID = ?;
-        `;
+        WHERE userID = ?;`;
         //db
         db.query(strQry,[req.params.id], 
             (err)=>{
@@ -172,8 +168,7 @@ class Product {
         const strQry = 
         `
         INSERT INTO products
-        SET ?;
-        `;
+        SET ?;`;
         db.query(strQry,[req.body],
             (err)=> {
                 if(err){
@@ -190,8 +185,7 @@ class Product {
         `
         UPDATE products
         SET ?
-        WHERE id = ?
-        `;
+        WHERE id = ?`;
         db.query(strQry,[req.body, req.params.id],
             (err)=> {
                 if(err){
@@ -207,8 +201,7 @@ class Product {
         const strQry = 
         `
         DELETE FROM products
-        WHERE id = ?;
-        `;
+        WHERE id = ?;`;
         db.query(strQry,[req.params.id], (err)=> {
             if(err) res.status(400).json({err: "The record was not found."});
             res.status(200).json({msg: "A product was deleted."});
