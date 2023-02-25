@@ -68,7 +68,7 @@ class User {
         const strQry = 
         `
         SELECT userID, firstName, lastName, gender, cellphoneNumber, emailAdd, userRole, userProfile, joinDate, cart
-        FROM Users
+        FROM users
         WHERE userID = ?;`;
         //db
         db.query(strQry,[req.params.id], 

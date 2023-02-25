@@ -25,6 +25,11 @@ router.post('/login', bodyParser.json(), (req, res)=>{
 router.get('/users', (req, res)=>{
     user.fetchUsers(req, res);
 });
+
+//Retrieve single user
+router.get('/users/:id', (req,res) => {
+    user.fetchUser(req,res)
+})
 // Update
 router.put('/user/:id',bodyParser.json(), (req, res)=>{
     user.updateUser(req, res);
